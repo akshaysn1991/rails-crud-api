@@ -1,8 +1,7 @@
 <%= form_with(model: datacenter, local: true) do |form| %>
   <% if datacenter.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(datacenter.errors.count, "error") %> prohibited this datacenter from being saved:</h2>
-
+      <!-- <h2><%#= pluralize(datacenter.errors.count, "error") %> prohibited this datacenter from being saved:</h2> -->
       <ul>
         <% datacenter.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,33 +10,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
+  <div class="form-horizontal">
+
+    <div class="form-group">
+      <%= form.label :code, 'Code:', class: 'control-label col-md-2 col-md-offset-1' %>
+      <div class="col-md-6">
+        <%= form.text_field :code, class: 'form-control', placeholder:'Code', required: true, autofocus: true %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :servers_available, 'Servers Available:', class:'control-label col-md-2 col-md-offset-1' %>
+      <div class="col-md-6">
+        <%= form.select :servers_available, options_for_select([['Yes', true], ['No', false]], :selected => form.object.servers_available), {}, { class: "form form-group form-control" } %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :servers_capacity, 'Servers Capacity:', class:'control-label col-md-2 col-md-offset-1' %>
+      <div class="col-md-6">
+        <%= form.number_field :servers_capacity, { class: "form form-group form-control" } %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :country_id, 'Country:', class:'control-label col-md-2 col-md-offset-1' %>
+       <div class="col-md-6">
+        <%= form.collection_select(:country_id, Country.all, :id, :name, {}, { class: "form form-group form-control" }) %>
+      </div>
+    </div>
+
+    <% label = params[:id].present? ? 'Update Data center' : 'Create Data Center' %>
+    <div class="form-group actions">
+      <div class='row'>
+        <div class="col-md-3 col-md-offset-3">
+          <%= form.submit "#{label}", class:'btn btn-info' %>
+        </div>
+        <div class="col-md-2 col-md-offset-3">
+          <%= link_to 'Back', datacenters_path, class:'btn btn-secondary' %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :servers_available %>
-    <%#= form.check_box :servers_available %>
-    <%#= form.select(:active, options_for_select([[true, true], [false, false]], {:selected => @datacenter.active}),:prompt => "Select") %>
-    <%= form.select :servers_available, options_for_select([['Yes', true], ['No', false]], :selected => form.object.servers_available)%>
-
-
-  </div>
-
-  <div class="field">
-    <%= form.label :servers_capacity %>
-    <%= form.number_field :servers_capacity %>
-  </div>
-
-  <div class="field">
-    <%= form.label :country_id %>
-    <%#= form.text_field :country_id %>
-    <%= form.collection_select(:country_id, Country.all, :id, :name,
-      {} ) %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
+
+  
