@@ -1,14 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @country.name %>
-</p>
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>Name</th>
+    <td><%= @country.name %></td>
+  </tr>
 
-<p>
-  <strong>Language:</strong>
-  <%= @country.language_id %>
-</p>
+  <tr>
+    <th>Langauage</th>
+    <td><%= @country.language.name %></td>
+  </tr>
+</table>
 
-<%= link_to 'Edit', edit_country_path(@country) %> |
-<%= link_to 'Back', countries_path %>
+<div class='row'>
+  <div class="col-md-2 col-md-offset-2">
+    <%= link_to 'Edit', edit_country_path(@country), class:'btn btn-secondary btn-block' %> 
+  </div>
+  <div class="col-md-2 col-md-offset-2">
+    <%= link_to 'Back', countries_path, class:'btn btn-secondary btn-block' %>
+  </div>
+</div>
+
+<style type="text/css">
+  th,td {
+      width: 200px;
+  }
+</style>
