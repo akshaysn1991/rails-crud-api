@@ -8,4 +8,5 @@ Rails.application.routes.draw do
       resources :datacenters
     end 
   end
+   root to: 'datacenters#index'
 end
