@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @datacenter.code %>
+</p>
+
+<p>
+  <strong>Servers available:</strong>
+  <%= @datacenter.servers_available.humanize %>
+</p>
+
+<p>
+  <strong>Servers capacity:</strong>
+  <%= @datacenter.servers_capacity %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @datacenter.country.name %>
+</p>
+
+<%= link_to 'Edit', edit_datacenter_path(@datacenter) %> |
+<%= link_to 'Back', datacenters_path %>
