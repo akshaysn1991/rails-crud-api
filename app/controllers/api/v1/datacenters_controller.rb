@@ -4,25 +4,9 @@ class Api::V1::DatacentersController < ApplicationController
     render json: all_posts
   end
 
-  def create
-    post = Datacenter.create(datacenter_params)
-    render json: post
-  end
-
   def show
-    post = Datacenter.find(params[:id])
+    post = Datacenter.where(id: params[:id])
     render json: post
-  end
-
-  def update
-    post = Datacenter.find(params[:id])
-    post.update(datacenter_params)
-    render json: post
-  end
-
-  def destroy
-    Datacenter.destroy(params[:id])
-    head :ok
   end
 
   private
