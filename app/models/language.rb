@@ -1,4 +1,5 @@
 class Language < ApplicationRecord
     validates :name, presence: true
-    has_many :countries
+    validates_uniqueness_of :name, :case_sensitive => false
+    has_many :countries, dependent: :destroy
 end
